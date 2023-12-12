@@ -27,6 +27,8 @@ const Place = mongoose.model('Place', {
     }
 })
 
+Place.createIndexes();
+
 // const place1 = new Place({
 //     name: 'First Core Coffee',
 //     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',

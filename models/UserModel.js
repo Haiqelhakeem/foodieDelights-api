@@ -15,4 +15,6 @@ const User = mongoose.model('User', {
     }
 })
 
+User.createIndexes();
+
 module.exports = User

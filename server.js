@@ -6,16 +6,14 @@ const mongoose = require('mongoose');
 const UserRoute = require('./routes/UserRoute');
 const PlaceRoute = require('./routes/PlaceRoute');
 const Place = require('./models/PlaceModel');
+const User = require('./models/UserModel');
 // const connectDb = require('./utils/db');
 
 // Express app
 const app = express();
 
-// Connect to MongoDB with localhost
+// Connect to MongoDB
 require("./utils/db");
-
-// Connect to MongoDB with Atlas
-// connectDb();
 
 //cors
 app.use((req, res, next) => {
@@ -47,7 +45,26 @@ app.use(cors());
 
 // Routing
 app.get('/', (req, res) => {
-  res.json({ message: 'Hello World' });
+  res.send('App is working');
+});
+
+
+app.post("/register", async (req, resp) => {
+  try {
+      const user = new User(req.body);
+      let result = await user.save();
+      result = result.toObject();
+      if (result) {
+          delete result.password;
+          resp.send(req.body);
+          console.log(result);
+      } else {
+          console.log("User already register");
+      }
+
+  } catch (e) {
+      resp.send("Something Went Wrong");
+  }
 });
 
 

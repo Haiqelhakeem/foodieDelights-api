@@ -6,8 +6,11 @@ const placeController = require('../controllers/PlaceController');
 // Get all places
 router.get('/places', placeController.getAllPlaces);
 
+// Get a place by ID
+router.get('/places/:id', placeController.getPlaceById);
+
 // Create a new place
-router.post('/places', placeController.createPlace);
+// router.post('/places/', placeController.createPlace);
 
 // Add routes for other CRUD operations as needed
 

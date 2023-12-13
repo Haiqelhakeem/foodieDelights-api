@@ -7,6 +7,7 @@ const UserRoute = require('./routes/UserRoute');
 const PlaceRoute = require('./routes/PlaceRoute');
 const Place = require('./models/PlaceModel');
 const User = require('./models/UserModel');
+const { ObjectId } = require('mongodb');
 // const connectDb = require('./utils/db');
 
 // Express app
@@ -25,6 +26,13 @@ app.use((req, res, next) => {
 app.get('/places', async (req, res) => {
   Place.find().then((places) => {
     res.send(places);
+  })
+})
+
+app.get('/places/:id', async (req, res) => {
+  const id = req.params.id;
+  Place.findOne(new ObjectId(id)).then((place) => {
+    res.send(place);
   })
 })
 

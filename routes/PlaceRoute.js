@@ -9,6 +9,9 @@ router.get('/places', placeController.getAllPlaces);
 // Get a place by ID
 router.get('/places/:id', placeController.getPlaceById);
 
+//Create a new place
+// router.post('/places', placeController.createPlace);
+
 // Create a new place
 // router.post('/places/', placeController.createPlace);
 

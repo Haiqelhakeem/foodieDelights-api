@@ -1,6 +1,6 @@
 // controllers/placeController.js
 const { ObjectId } = require("mongodb");
-const Places = require("../models/PlaceModel");
+const Place = require("../models/PlaceModel");
 
 const getAllPlaces = async (req, res) => {
   try {
@@ -24,18 +24,16 @@ const getPlaceById = async (req, res) => {
   //   });
 }
 
-const createPlace = async (req, res) => {
-  const placeData = req.body;
-  // const { name, desc, address, category, img, rating } = req.body;
-  console.log("placeData: ", placeData);
-  // res.send("placeData: ", placeData);
-  try {
-    const newPlace = await Places.create(placeData);
-    res.status(201).json(newPlace);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+// const createPlace = async (req, res) => {
+//   const placeData = req.body;
+//   console.log(placeData);
+//   try {
+//     const newPlace = await Place.create(placeData);
+//     res.status(201).json(newPlace);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 
 // Add update, delete, and other CRUD operations as needed
 

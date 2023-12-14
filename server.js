@@ -36,6 +36,13 @@ app.get('/places/:id', async (req, res) => {
   })
 })
 
+// app.post('/places', async (req, res) => {
+//   const placeData = req.body;
+//   Place.create(placeData).then((place) => {
+//     res.send(place);
+//   })
+// })
+
 
 // Middleware
 app.use(express.json());

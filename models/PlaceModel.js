@@ -29,14 +29,4 @@ const Place = mongoose.model('Place', {
 
 Place.createIndexes();
 
-// const place1 = new Place({
-//     name: 'First Core Coffee',
-//     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-//     address: 'Dipatiukur, Bandung',
-//     category: 'cafe',
-//     img: 'https://source.unsplash.com/1010x780?cafe-coffee'
-// })
-
-// place1.save().then((place) => console.log(place))
-
 module.exports = Place

@@ -39,6 +39,6 @@ const getPlaceById = async (req, res) => {
 
 module.exports = {
   getAllPlaces,
-  createPlace,
+  // createPlace,
   getPlaceById
 }

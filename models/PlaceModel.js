@@ -25,6 +25,10 @@ const placeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  contact: {
+    type: String,
+    required: true,
+  }
 });
 
 const Place = mongoose.model("Place", placeSchema);

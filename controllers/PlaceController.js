@@ -46,7 +46,7 @@ const createPlace = async (req, res) => {
   }
 };
 
-// Add update, delete, and other CRUD operations as needed
+// Update Place
 const updatePlace = async (req, res) => {
   const id = req.params.id;
   const placeData = req.body;
@@ -58,10 +58,21 @@ const updatePlace = async (req, res) => {
   }
 };
 
+// Delete Place
+const deletePlace = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const place = await Place.findByIdAndDelete(id);
+    res.json(place);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 module.exports = {
   getAllPlaces,
   createPlace,
   getPlaceById,
   updatePlace,
+  deletePlace
 };

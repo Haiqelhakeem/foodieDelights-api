@@ -8,13 +8,15 @@ router.get("/places", placeController.getAllPlaces);
 
 // Get a place by ID
 router.get("/places/:id", placeController.getPlaceById);
+
+// Update a place
 router.put("/places/:id", placeController.updatePlace);
 
 //Create a new place
 router.post("/places", placeController.createPlace);
 
-// Create a new place
-// router.post('/places/', placeController.createPlace);
+// Delete a place
+router.delete("/places/:id", placeController.deletePlace);
 
 // Add routes for other CRUD operations as needed
 

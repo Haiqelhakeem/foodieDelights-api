@@ -8,6 +8,7 @@ router.get("/places", placeController.getAllPlaces);
 
 // Get a place by ID
 router.get("/places/:id", placeController.getPlaceById);
+router.put("/places/:id", placeController.updatePlace);
 
 //Create a new place
 router.post("/places", placeController.createPlace);

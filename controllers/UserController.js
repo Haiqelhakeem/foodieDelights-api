@@ -1,39 +1,43 @@
-const User = require('../models/UserModel.js')
+const bcrypt = require("bcrypt");
+const User = require("../models/UserModel");
 
-const getUsers = async (req, res) => {
-    try {
-        const user = await User.find()
-        res.json(user)
-    } catch (error) {
-        res.status(500).json({message: error.message})
+const registerUser = async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exists" });
     }
-}
 
-const getUserById = async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id)
-        res.json(user)
-    } catch (error) {
-        res.status(404).json({message: error.message})
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ name, email, password: hashedPassword });
+    await newUser.save();
+
+    res.status(201).json({ message: "Registration successful", user: newUser });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-}
 
-const saveUser = async (req, res) => {
-    const user = new User(
-        // name: req.body.name,
-        // email: req.body.email,
-        // password: req.body.password,
-        req.body
-    )
-    try {
-        const insertedUser = await User.save();
-        res.status(201).json(insertedUser)
-    } catch (error) {
-        res.status(400).json({message: error.message})
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "Invalid password" });
     }
-}
 
+    res.status(200).json({ message: "Login successful", user });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
-module.exports = {
-    getUsers, getUserById, saveUser
-}
+module.exports = { registerUser, loginUser };

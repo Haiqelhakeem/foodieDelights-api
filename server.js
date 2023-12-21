@@ -8,6 +8,7 @@ const PlaceRoute = require("./routes/PlaceRoute");
 const Place = require("./models/PlaceModel");
 const User = require("./models/UserModel");
 const { ObjectId } = require("mongodb");
+const { registerUser, loginUser } = require("./controllers/UserController");
 // const connectDb = require('./utils/db');
 
 // Express app
@@ -28,25 +29,11 @@ app.use(cors());
 
 // Routing
 app.use(PlaceRoute);
+// app.post("/register", registerUser);
+// app.post("/login", loginUser);
+app.use(UserRoute);
 app.get("/", (req, res) => {
   res.send("App is working");
-});
-
-app.post("/register", async (req, resp) => {
-  try {
-    const user = new User(req.body);
-    let result = await user.save();
-    result = result.toObject();
-    if (result) {
-      delete result.password;
-      resp.send(req.body);
-      console.log(result);
-    } else {
-      console.log("User already register");
-    }
-  } catch (e) {
-    resp.send("Something Went Wrong");
-  }
 });
 
 // Listen for app
